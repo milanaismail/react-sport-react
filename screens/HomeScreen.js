@@ -1,13 +1,15 @@
 import React from 'react';
-import { StyleSheet, View, Button } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 
 const HomeScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
-            <Button
-                title="Go to Product"
+            <TouchableOpacity
+                style={styles.button}
                 onPress={() => navigation.navigate('Product')}
-            />
+            >
+                <Text style={styles.buttonText}>Shop Now</Text>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -17,6 +19,15 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    button: {
+        backgroundColor: '#b3d1ff',
+        paddingHorizontal: 50,
+        paddingVertical: 20,
+        borderRadius: 6,
+    },
+    buttonText: {
+        fontSize: 20,
     },
 });
 

@@ -51,6 +51,8 @@ const styles = StyleSheet.create({
     },
     label: {
         color: '#333',
+        fontSize: 16,
+        marginLeft: 10,
     },
     picker: {
         color: '#333',
