@@ -4,18 +4,42 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 const Product = (props) => {
   return (
     <TouchableOpacity activeOpacity={0.5}>
-      <View>
+      <View style={styles.productContainer}>
         <Image
           source={{
             uri: props.productImage,
           }}
-          style={{ width: 100, height: 100 }} // Set the desired width and height
-        />
-        <Text>{props.title}</Text>
-        <Text>€ {props.price}</Text>
+          style={styles.productImage}
+          />
+          <Text style={styles.productTitle}>{props.title}</Text>
+          <Text style={styles.productPrice}>€ {props.price}</Text>
       </View>
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  productContainer: {
+    borderWidth: 1, // Add border width
+    borderColor: '#ddd', // Border color
+    borderRadius: 8, // Optional: Add border radius for rounded corners
+    padding: 10, // Optional: Add padding for space around the product
+    marginBottom: 10, // Optional: Add margin bottom for space between products
+  },
+  productImage: {
+    width: 100,
+    height: 100,
+  },
+  productTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 5,
+  },
+  productPrice: {
+    fontSize: 14,
+    color: '#888',
+  },
+});
+
 
 export default Product;

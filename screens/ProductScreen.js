@@ -13,7 +13,7 @@ const Products = ({ navigation }) => {
           let url;
           if (Platform.OS == 'android') {
             //ddev describe om port number te weten te komen
-            url = "http://10.0.2.2:55017/api/products/";
+            url = "http://10.0.2.2:55001/api/products/";
           }
           else {
             url = "https://sport.ddev.site/api/products"
@@ -26,36 +26,45 @@ const Products = ({ navigation }) => {
 
 
           const json = await response.json();
-          console.log('Response status:', response.status);
           setProduct(json.items);
         } catch (error) {
-          console.error('Error:', error);
         }
       }
 
       useEffect(() => {
-        console.log('useEffect is running');
         getProduct();
       }, []);
 
     return (  
-        <View>
+      <View style={styles.container}>
             <FlatList
                 data={products}
                 keyExtractor={item => item.id}
                 renderItem={({ item }) => (
-                  <Product
-                  id={item.id}
-                  title={item.title}
-                  productImage={item.productImage}
-                  price={item.price}
-                  navigation={navigation}
-                  />
+                  <View style={styles.productContainer}>
+                      <Product
+                      id={item.id}
+                      title={item.title}
+                      productImage={item.productImage}
+                      price={item.price}
+                      navigation={navigation}
+                      />
+                  </View>
                   )}
                   />  
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+  },
+  productContainer: {
+    marginBottom: 10,
+  },
+});
 
 
  
