@@ -8,7 +8,7 @@ import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 
 // Import your logo image
-import LogoImage from './assets/favicon.png';
+import LogoImage from './assets/logo.png';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,26 +25,23 @@ const CustomHeader = ({ navigation }) => {
   };
 
   return (
-    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-      {/* Hamburger menu icon */}
-      <TouchableOpacity style={{ marginLeft: 10 }} onPress={toggleMenu}>
+    <View style={styles.nav}>
+      <TouchableOpacity onPress={toggleMenu}>
         <Icon name="bars" size={30} color="#000" />
       </TouchableOpacity>
 
-      {/* Logo */}
-      <Image source={LogoImage} style={{ width: 100, height: 40, marginLeft: 10 }} />
+      <Image source={LogoImage} style={{ width: 100, height: 40, }} resizeMode="contain"/>
 
-      {/* Search icon */}
-      <TouchableOpacity style={{ marginLeft: 'auto', marginRight: 10 }}>
+      <View style={styles.searchShop}> 
+      <TouchableOpacity style={{ marginRight: 10 }}>
         <Icon name="search" size={20} color="#000" />
       </TouchableOpacity>
 
-      {/* Bag icon */}
       <TouchableOpacity>
-        <Icon name="shopping-bag" size={20} color="#000" style={{ marginRight: 10 }} />
+        <Icon name="shopping-bag" size={20} color="#000" />
       </TouchableOpacity>
+      </View>
 
-      {/* Custom Menu */}
       <Modal visible={isMenuVisible} transparent={true} animationType="slide">
         <View style={styles.menuContainer}>
           <TouchableOpacity onPress={toggleMenu}>
@@ -56,7 +53,6 @@ const CustomHeader = ({ navigation }) => {
           <TouchableOpacity onPress={() => navigateToScreen('Product')}>
             <Text style={styles.menuItem}>Products</Text>
           </TouchableOpacity>
-          {/* Add other menu items here */}
         </View>
       </Modal>
     </View>
@@ -99,6 +95,17 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginVertical: 10,
   },
+  nav: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  searchShop: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  }
+
 });
 
 
