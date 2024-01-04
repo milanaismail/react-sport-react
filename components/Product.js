@@ -16,6 +16,11 @@ const Product = (props) => {
             />
             <Text style={styles.productTitle}>{props.title}</Text>
             <Text style={styles.productPrice}>€ {props.price}</Text>
+            <TouchableOpacity
+                style={styles.button}
+            >
+                <Text style={styles.buttonText}>Add to cart</Text>
+            </TouchableOpacity>
       </View>
     </TouchableOpacity>
   );
@@ -46,6 +51,17 @@ const styles = StyleSheet.create({
   productPrice: {
     fontSize: 14,
     color: '#888',
+  },
+  button: {
+    backgroundColor: '#b3d1ff',
+    paddingHorizontal: 25,
+    paddingVertical: 15,
+    borderRadius: 6,
+    marginTop: 10,
+  },
+  buttonText: {
+    fontSize: 16,
+    color: 'white',
   },
 });
 

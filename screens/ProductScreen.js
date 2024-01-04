@@ -72,6 +72,7 @@ const ProductScreen = ({ navigation }) => {
 
     return (  
       <View style={styles.container}>
+          <Text style={styles.shopTitle}>All Products</Text>
             <Filter onSortChange={handleSortChange} />
             <FlatList
                 data={sortedProducts}
@@ -95,6 +96,14 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     alignItems: 'center',
+  },
+  shopTitle: {
+    fontSize: 30,
+    fontWeight: 'bold', 
+    backgroundColor: 'rgba(0,0,0,0.1)',
+    width: '100%',
+    textAlign: 'center',
+    paddingVertical: 24,
   },
   
 });
