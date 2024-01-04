@@ -94,8 +94,9 @@ const ProductScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    padding:6,
+  
   },
+  
 });
 
 

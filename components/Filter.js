@@ -12,37 +12,46 @@ const Filter = ({ onSortChange }) => {
   };
 
   return (
-    <View style={styles.pickerContainer}>
-    <Text style={styles.label}>Sort by</Text>
-    <Picker
-      selectedValue={sortValue}
-      style={styles.picker}
-      onValueChange={(itemValue) => handleSortChange(itemValue)}
-    >
-      <Picker.Item label="Price: low to high" value="1" />
-      <Picker.Item label="Price: high to low" value="2" />
-    </Picker>
-  </View>
+    <View style={styles.shopControlBar}>
+        <View style={styles.pickerContainer}>
+            <Text style={styles.label}>Sort by</Text>
+            <Picker
+            style={styles.picker}
+            selectedValue={sortValue}
+            onValueChange={(itemValue) => handleSortChange(itemValue)}
+            >
+                
+            <Picker.Item label="Price: low to high" value="1" />
+            <Picker.Item label="Price: high to low" value="2" />
+            </Picker>
+        </View>   
+     </View>   
 );
 };
 
 const styles = StyleSheet.create({
+    shopControlBar: {
+        backgroundColor: 'rgba(0, 0, 0, 0.2)',
+        width: '100%',
+        alignItems: 'flex-end',
+        padding: 10,
+        marginBottom: 8,
+        
+      },
     pickerContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      borderWidth: 1,
-      borderColor: '#888',
-      borderRadius: 5,
-      overflow: 'hidden',
+        borderWidth: 1,
+        borderColor: '#888',
+        borderRadius: 5,
+        width:100,
+        backgroundColor: 'white',
+
     },
     label: {
-      paddingLeft: 10,
-      paddingRight: 10,
+        color: '#333',
     },
     picker: {
-      height: 50,
-      width: 200,
-    },
+        color: '#333', // Set text color
+      },
   });
 
 export default Filter;

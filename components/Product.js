@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     padding: 10, // Optional: Add padding for space around the product
     margin: 6, // Optional: Add margin bottom for space between products
     alignItems: 'center',
+    backgroundColor: '#fff',
   },
   productImage: {
     height: 150,
