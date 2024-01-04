@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, TextInput, Platform } from 'react-native';
-
+import Filter from '../components/Filter';
 import Product from '../components/Product';
 
 const ProductScreen = ({ navigation }) => {
-    const [products, setProduct] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [sortedProducts, setSortedProducts] = useState([]);
+  const [sortValue, setSortValue] = useState('0');
 
     const getProduct = async () => {
         try {
@@ -29,12 +31,40 @@ const ProductScreen = ({ navigation }) => {
           }
 
           const json = await response.json();
-          setProduct(json.items);
+          setProducts(json.items);
+          setSortedProducts(json.items);
         } catch (error) {
           console.error('Error fetching products:', error);
 
         }
       }
+
+      const handleSortChange = (value) => {
+        setSortValue(value);
+    
+        switch (value) {
+          case '1':
+            sortProductsByPriceLowToHigh();
+            break;
+          case '2':
+            sortProductsByPriceHighToLow();
+            break;
+          default:
+            // Default: Do nothing or reset to original order
+            setSortedProducts(products);
+            break;
+        }
+      };
+
+      const sortProductsByPriceLowToHigh = () => {
+        const sorted = [...sortedProducts].sort((a, b) => a.price - b.price);
+        setSortedProducts(sorted);
+      };
+    
+      const sortProductsByPriceHighToLow = () => {
+        const sorted = [...sortedProducts].sort((a, b) => b.price - a.price);
+        setSortedProducts(sorted);
+      };
 
       useEffect(() => {
         getProduct();
@@ -42,8 +72,9 @@ const ProductScreen = ({ navigation }) => {
 
     return (  
       <View style={styles.container}>
+            <Filter onSortChange={handleSortChange} />
             <FlatList
-                data={products}
+                data={sortedProducts}
                 keyExtractor={item => item.id}
                 numColumns={2} // Set numColumns to 2 for a two-column layout
                 renderItem={({ item }) => (
