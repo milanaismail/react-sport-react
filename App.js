@@ -1,8 +1,10 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Image, TouchableOpacity, View } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Image, TouchableOpacity, View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
@@ -12,7 +14,8 @@ import LogoImage from './assets/favicon.png';
 
 const Stack = createNativeStackNavigator();
 
-const CustomHeader = ({ navigation }) => {
+const CustomHeader = () => {
+  const navigation = useNavigation();
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
       {/* Hamburger menu icon */}
