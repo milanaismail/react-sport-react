@@ -41,7 +41,6 @@ const Products = ({ navigation }) => {
                 data={products}
                 keyExtractor={item => item.id}
                 renderItem={({ item }) => (
-                  <View style={styles.productContainer}>
                       <Product
                       id={item.id}
                       title={item.title}
@@ -49,8 +48,8 @@ const Products = ({ navigation }) => {
                       price={item.price}
                       navigation={navigation}
                       />
-                  </View>
                   )}
+                  
                   />  
         </View>
     );
@@ -58,11 +57,10 @@ const Products = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1, 
+    backgroundColor: '#fff',
     padding: 10,
-  },
-  productContainer: {
-    marginBottom: 10,
+    justifyContent: 'space-between',
   },
 });
 

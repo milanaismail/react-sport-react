@@ -20,11 +20,13 @@ const Product = (props) => {
 
 const styles = StyleSheet.create({
   productContainer: {
+    flex: 1, 
     borderWidth: 1, // Add border width
     borderColor: '#ddd', // Border color
     borderRadius: 8, // Optional: Add border radius for rounded corners
     padding: 10, // Optional: Add padding for space around the product
     marginBottom: 10, // Optional: Add margin bottom for space between products
+    alignItems: 'center',
   },
   productImage: {
     width: 100,
@@ -34,6 +36,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginTop: 5,
+    width: 155,
+    height: 90,
+    textAlign: 'center',
   },
   productPrice: {
     fontSize: 14,
