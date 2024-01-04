@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, FlatList, TextInput, Platform } from 'react-nat
 
 import Product from '../components/Product';
 
-const Products = ({ navigation }) => {
+const ProductScreen = ({ navigation }) => {
     const [products, setProduct] = useState([]);
 
     const getProduct = async () => {
@@ -40,6 +40,7 @@ const Products = ({ navigation }) => {
             <FlatList
                 data={products}
                 keyExtractor={item => item.id}
+                numColumns={2} // Set numColumns to 2 for a two-column layout
                 renderItem={({ item }) => (
                       <Product
                       id={item.id}
@@ -49,7 +50,6 @@ const Products = ({ navigation }) => {
                       navigation={navigation}
                       />
                   )}
-                  
                   />  
         </View>
     );
@@ -57,13 +57,11 @@ const Products = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, 
     backgroundColor: '#fff',
-    padding: 10,
-    justifyContent: 'space-between',
+    padding:6,
   },
 });
 
 
  
-export default Products;
+export default ProductScreen;
