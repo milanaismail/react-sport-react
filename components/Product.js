@@ -6,16 +6,16 @@ const Product = (props) => {
 
   return (
     <TouchableOpacity activeOpacity={0.5}>
-      <View style={styles.productContainer}>
-        <Image
-          style={styles.productImage}
-          source={{
-            uri: props.productImage,
-          }}
-          onError={(error) => console.error('Image load error:', error.nativeEvent)}
-          />
-          <Text style={styles.productTitle}>{props.title}</Text>
-          <Text style={styles.productPrice}>€ {props.price}</Text>
+        <View style={styles.productContainer}>
+          <Image
+            style={styles.productImage}
+            source={{
+              uri: props.productImage,
+            }}
+            onError={(error) => console.error('Image load error:', error.nativeEvent)}
+            />
+            <Text style={styles.productTitle}>{props.title}</Text>
+            <Text style={styles.productPrice}>€ {props.price}</Text>
       </View>
     </TouchableOpacity>
   );
