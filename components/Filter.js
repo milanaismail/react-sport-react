@@ -16,13 +16,12 @@ const Filter = ({ onSortChange }) => {
         <View style={styles.pickerContainer}>
             <Text style={styles.label}>Sort by</Text>
             <Picker
-            style={styles.picker}
-            selectedValue={sortValue}
-            onValueChange={(itemValue) => handleSortChange(itemValue)}
-            >
-                
-            <Picker.Item label="Price: low to high" value="1" />
-            <Picker.Item label="Price: high to low" value="2" />
+                style={styles.picker}
+                selectedValue={sortValue}
+                onValueChange={(itemValue) => handleSortChange(itemValue)}
+                >
+                <Picker.Item label="Price: low to high" value="1" />
+                <Picker.Item label="Price: high to low" value="2" />
             </Picker>
         </View>   
      </View>   
@@ -40,17 +39,22 @@ const styles = StyleSheet.create({
       },
     pickerContainer: {
         borderWidth: 1,
-        borderColor: '#888',
-        borderRadius: 5,
-        width:100,
+        borderColor: 'transparent',
+        borderRadius: 50,
+        width:150,
         backgroundColor: 'white',
+        height: 40,
+        padding: 6,
+        flexDirection: 'row',
+        alignItems: 'center',
 
     },
     label: {
         color: '#333',
     },
     picker: {
-        color: '#333', // Set text color
+        color: '#333',
+        flex: 1,
       },
   });
 

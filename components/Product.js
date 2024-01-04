@@ -23,11 +23,11 @@ const Product = (props) => {
 
 const styles = StyleSheet.create({
   productContainer: {
-    borderWidth: 1, // Add border width
-    borderColor: '#ddd', // Border color
-    borderRadius: 8, // Optional: Add border radius for rounded corners
-    padding: 10, // Optional: Add padding for space around the product
-    margin: 6, // Optional: Add margin bottom for space between products
+    borderWidth: 1, 
+    borderColor: '#ddd', 
+    borderRadius: 8, 
+    padding: 10, 
+    margin: 6, 
     alignItems: 'center',
     backgroundColor: '#fff',
   },
