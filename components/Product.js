@@ -10,7 +10,7 @@ const Product = (props) => {
           <Image
             style={styles.productImage}
             source={{
-              uri: props.productImage,
+              uri: props.productImage
             }}
             onError={(error) => console.error('Image load error:', error.nativeEvent)}
             />
