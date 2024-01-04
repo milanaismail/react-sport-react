@@ -24,10 +24,15 @@ const ProductScreen = ({ navigation }) => {
             timeout: 10000, // 10 seconds
           });
 
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
 
           const json = await response.json();
           setProduct(json.items);
         } catch (error) {
+          console.error('Error fetching products:', error);
+
         }
       }
 
@@ -60,6 +65,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding:6,
   },
+  
 });
 
 

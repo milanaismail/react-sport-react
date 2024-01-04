@@ -2,16 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 const Product = (props) => {
-  console.error('Product Image URL:', props.productImage);
+  console.log('Product Image URL:', props.productImage);
 
   return (
     <TouchableOpacity activeOpacity={0.5}>
       <View style={styles.productContainer}>
         <Image
+          style={styles.productImage}
           source={{
             uri: props.productImage,
           }}
-          style={styles.productImage}
+          onError={(error) => console.error('Image load error:', error.nativeEvent)}
           />
           <Text style={styles.productTitle}>{props.title}</Text>
           <Text style={styles.productPrice}>€ {props.price}</Text>
@@ -30,8 +31,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   productImage: {
-    width: 100,
-    height: 100,
+    height: 150,
+    
   },
   productTitle: {
     fontSize: 16,
