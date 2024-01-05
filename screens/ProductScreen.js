@@ -2,11 +2,34 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, TextInput, Platform } from 'react-native';
 import Filter from '../components/Filter';
 import Product from '../components/Product';
+import { Picker } from '@react-native-picker/picker';
+
+
+const CategorySelector = ({ selectedCategory, onSelectCategory }) => {
+  const categories = ['All', 'Ice Hockey Helmets', 'Ice Hockey Sticks', 'Ice Hockey Skates'];
+
+  return (
+    <View style={styles.categorySelectorContainer}>
+      <Text style={styles.categorySelectorLabel}>Select Category:</Text>
+      <Picker
+        selectedValue={selectedCategory}
+        onValueChange={(itemValue) => onSelectCategory(itemValue)}
+        style={styles.categorySelectorPicker}
+      >
+        {categories.map((category) => (
+          <Picker.Item key={category} label={category} value={category} />
+        ))}
+      </Picker>
+    </View>
+  );
+};
 
 const ProductScreen = ({ navigation }) => {
   const [products, setProducts] = useState([]);
   const [sortedProducts, setSortedProducts] = useState([]);
   const [sortValue, setSortValue] = useState('0');
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
 
     const getProduct = async () => {
         try {
@@ -65,13 +88,30 @@ const ProductScreen = ({ navigation }) => {
         setSortedProducts(sorted);
       };
 
+      const filterProductsByCategory = () => {
+        if (selectedCategory) {
+          const filtered = products.filter((item) => item.categoryTitle === selectedCategory);
+          setSortedProducts(filtered);
+        } else {
+          setSortedProducts(products);
+        }
+      };
+
       useEffect(() => {
         getProduct();
       }, []);
 
+      useEffect(() => {
+        filterProductsByCategory();
+      }, [selectedCategory]);
+
     return (  
       <View style={styles.container}>
           <Text style={styles.shopTitle}>All Products</Text>
+          <CategorySelector
+        selectedCategory={selectedCategory}
+        onSelectCategory={(category) => setSelectedCategory(category)}
+      />
             <Filter onSortChange={handleSortChange} />
             <FlatList
                 data={sortedProducts}

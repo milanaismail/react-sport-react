@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 const Product = (props) => {
-  console.log('Product Image URL:', props.productImage);
-
   return (
     <TouchableOpacity activeOpacity={0.5}>
         <View style={styles.productContainer}>
