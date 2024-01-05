@@ -1,33 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { View, Text, FlatList } from 'react-native';
 import Product from '../components/Product';
 
-const SkatesScreen = ({ route, navigation }) => {
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const { products } = route.params;
-
-  useEffect(() => {
-    if (products) {
-      const filtered = products.filter((product) => product.categoryTitle === route.name);
-      setFilteredProducts(filtered);
-    }
-  }, [route.name, products]);
-
+const SkatesScreen = ({ products }) => {
+  const skates = products ? products.filter((item) => item.categoryTitle === 'Skates') : [];
 
   return (
     <View>
-      <Text>{route.name}</Text>
+      <Text>Skates Screen</Text>
       <FlatList
-        data={filteredProducts}
+        data={skates}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <Product
+          <Product style={{ height: '100%', width: 100 }}
             id={item.id}
-            category={item.categoryTitle}
             title={item.title}
-            productImage={item.productImage}
             price={item.price}
-            navigation={navigation}
+            productImage={item.productImage}
           />
         )}
       />

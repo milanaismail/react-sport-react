@@ -4,7 +4,6 @@ import Filter from '../components/Filter';
 import Product from '../components/Product';
 import { Picker } from '@react-native-picker/picker';
 
-
 const CategorySelector = ({ selectedCategory, onSelectCategory }) => {
   const categories = ['All', 'Ice Hockey Helmets', 'Ice Hockey Sticks', 'Ice Hockey Skates'];
 
