@@ -82,7 +82,7 @@ const ProductScreen = ({ navigation }) => {
                     item.productImage = item.productImage.replace('sport.ddev.site', '10.0.2.2:55001');
                   }
 
-                  console.log('Category Title:', item.categoryTitle);
+                      console.log('Category Title:', item.categoryTitle);
 
                     return <Product
                       id={item.id}
@@ -91,7 +91,6 @@ const ProductScreen = ({ navigation }) => {
                       price={item.price}
                       navigation={navigation}
                       category={item.categoryTitle}
-                      onPress={() => navigation.navigate(item.categoryTitle)}
                       />
                     }}
                   />

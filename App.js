@@ -30,7 +30,7 @@ export default function App(){
           name="Products"
           component={ProductScreen}
           options={{
-            drawerLabel: 'Skates',
+            drawerLabel: 'Products',
             drawerLabelStyle: { fontSize: 18 }, 
           }}
         />                
