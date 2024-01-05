@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     alignItems: 'center',
+    height: '100%',
   },
   shopTitle: {
     fontSize: 30,
