@@ -91,6 +91,7 @@ const ProductScreen = ({ navigation }) => {
                       price={item.price}
                       navigation={navigation}
                       category={item.categoryTitle}
+                      onPress={() => navigation.navigate(item.categoryTitle)}
                       />
                     }}
                   />
