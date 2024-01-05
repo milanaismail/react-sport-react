@@ -65,7 +65,6 @@ const App = () => {
       <Stack.Navigator
         screenOptions={{
           headerTitle: ({ navigation }) => <CustomHeader navigation={navigation} />,
-          headerTitleAlign: 'center',
           headerStyle: {
             backgroundColor: '#b3d1ff',
           },

@@ -8,7 +8,7 @@ const Product = (props) => {
     <TouchableOpacity activeOpacity={0.5}>
         <View style={styles.productContainer}>
           <Image
-            style={styles.productImage}
+            style={[styles.productImage, { width: 100, height: 100 }]}
             source={{
               uri: props.productImage
             }}

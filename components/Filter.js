@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     shopControlBar: {
         backgroundColor: 'rgba(0, 0, 0, 0.2)',
         width: '100%',
-        alignItems: 'flex-end',
+        alignItems: 'center',
         padding: 10,
         marginBottom: 8,
         
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'transparent',
         borderRadius: 50,
-        width:'100%',
+        width:350,
         backgroundColor: 'white',
         height: 40,
         padding: 6,
