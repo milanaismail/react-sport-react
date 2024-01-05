@@ -23,7 +23,6 @@ const ProductScreen = ({ navigation }) => {
     
           const response = await fetch(url, {
             method: "GET",
-            timeout: 10000, // 10 seconds
           });
 
           if (!response.ok) {

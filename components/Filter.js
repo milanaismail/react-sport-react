@@ -41,18 +41,20 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'transparent',
         borderRadius: 50,
-        width:150,
+        width:'100%',
         backgroundColor: 'white',
         height: 40,
         padding: 6,
         flexDirection: 'row',
         alignItems: 'center',
+        overflow: 'hidden',
 
     },
     label: {
         color: '#333',
         fontSize: 16,
         marginLeft: 10,
+        width: 100,
     },
     picker: {
         color: '#333',
