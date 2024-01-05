@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Image, TouchableOpacity, View, Text, Modal, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -12,71 +13,21 @@ import LogoImage from './assets/logo.png';
 
 const Stack = createNativeStackNavigator();
 
-const CustomHeader = ({ navigation }) => {
-  const [isMenuVisible, setMenuVisible] = useState(false);
+const Drawer = createDrawerNavigator();
 
-  const toggleMenu = () => {
-    setMenuVisible(!isMenuVisible);
-  };
 
-  const navigateToScreen = (screenName) => {
-    toggleMenu();
-    navigation.navigate(screenName);
-  };
-
-  return (
-    <View style={styles.nav}>
-      <TouchableOpacity onPress={toggleMenu}>
-        <Icon name="bars" size={30} color="#000" />
-      </TouchableOpacity>
-
-      <Image source={LogoImage} style={{ width: 100, height: 40, }} resizeMode="contain"/>
-
-      <View style={styles.searchShop}> 
-      <TouchableOpacity style={{ marginRight: 10 }}>
-        <Icon name="search" size={20} color="#000" />
-      </TouchableOpacity>
-
-      <TouchableOpacity>
-        <Icon name="shopping-bag" size={20} color="#000" />
-      </TouchableOpacity>
-      </View>
-
-      <Modal visible={isMenuVisible} transparent={true} animationType="slide">
-        <View style={styles.menuContainer}>
-          <TouchableOpacity onPress={toggleMenu}>
-            <Icon name="times" size={30} color="#000" style={styles.closeIcon} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigateToScreen('HomeScreen')}>
-            <Text style={styles.menuItem}>Home</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigateToScreen('Product')}>
-            <Text style={styles.menuItem}>Products</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal>
-    </View>
-  );
-};
-
-const App = () => {
+export default function App(){
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerTitle: ({ navigation }) => <CustomHeader navigation={navigation} />,
-          headerStyle: {
-            backgroundColor: '#b3d1ff',
-          },
-          headerTintColor: '#000',
-        }}
-      >
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Product" component={ProductScreen} />
-      </Stack.Navigator>
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Product" component={ProductScreen} />
+        <Drawer.Screen name="About Us" component={HomeScreen} />
+        <Drawer.Screen name="Contact" component={HomeScreen} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
-};
+}
 
 const styles = StyleSheet.create({
   menuContainer: {
@@ -108,4 +59,3 @@ const styles = StyleSheet.create({
 });
 
 
-export default App;
