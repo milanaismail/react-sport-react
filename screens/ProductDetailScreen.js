@@ -50,7 +50,30 @@ const ProductDetailScreen = ({ route }) => {
                         <Text style={styles.quantity}>+</Text>
                 </TouchableOpacity>
                 </View>
+                <TouchableOpacity style={styles.button}>
+                    <Text style={styles.buttonText}>Add to Cart</Text>
+                </TouchableOpacity>
             </View>
+            <View style={styles.productOverview}>
+                <Text style={styles.productOverviewTitle}>Product Overview</Text>
+
+                <Text style={styles.overviewText}>The HYPERLITE 2 HELMET is the most advanced helmet we’ve ever built. Engineered for the elite and pro-inspired player who doesn’t want to compromise on comfort, protection, or performance, the HYPERLITE 2 HELMET offers an optimum level of performance in a state-of-the-art package.</Text>
+
+                <Text style={styles.listTitle}>KEY FEATURES:</Text>
+                
+                <Text style={styles.listItem}>• GX-POD </Text>
+                <Text style={styles.overviewText}>- Experience premium comfort & ventilation with a revolutionary 3D printed structure built to manage low, mid, and high-energy impacts.</Text>
+
+                <Text style={styles.listItem}>• Occipital Lock </Text>
+                <Text style={styles.overviewText}>- Stay dialed-in to the moment with the Occipital Lock + FreeForm Adjustment system allowing for easy, independent length and width adjustments.</Text>
+
+                <Text style={styles.listItem}>• Elite Ventilation </Text>
+                <Text style={styles.overviewText}> - Feel the improved air flow from strategically placed exterior vents that match the GX-POD integration.</Text>
+
+                <Text style={styles.listItem}>• FreeForm Adjustment System </Text>
+                <Text style={styles.overviewText}> – Independent length and width adjustments allow you to create a customized fit.</Text>
+            </View>
+
         </ScrollView>
   );
 };
@@ -92,6 +115,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: '#F2F2F2',
     paddingVertical: 20,
+    marginVertical: 20,
     },
     sizeLabel: {
     flexDirection: 'row',
@@ -148,7 +172,35 @@ const styles = StyleSheet.create({
     padding: 12,
     backgroundColor: '#fff',
     },
-    
+    button: {
+    backgroundColor: '#b3d1ff',
+    paddingHorizontal: 25,
+    paddingVertical: 15,
+    borderRadius: 20,
+    marginTop: 10,
+    marginBottom: 20,
+    alignItems: 'center',
+    },
+    buttonText: {
+    fontSize: 16,
+    },
+    productOverview: {
+    width: '100%',
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    marginBottom: 50,
+    borderTopWidth: 1,
+    borderTopColor: 'black', 
+    },
+    productOverviewTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    paddingBottom: 10,
+    },
+    overviewText: {
+    fontSize: 16,
+    },
+
 
 });
 
