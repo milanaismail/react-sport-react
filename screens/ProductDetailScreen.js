@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -11,32 +11,46 @@ const ProductDetailScreen = ({ route }) => {
   const [favorites, setFavorites] = useState([]); // Add this line to define the favorites state
 
 
-  const toggleFavorite = () => {
-    // Use the callback version of setIsFavorite to ensure the latest state value
-    setIsFavorite((prevIsFavorite) => {
-      // Toggle the favorite status
-      const newIsFavorite = !prevIsFavorite;
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      try {
+        const storedFavorites = await AsyncStorage.getItem('favorites');
+        if (storedFavorites) {
+          setFavorites(JSON.parse(storedFavorites));
+
+          // Set the initial isFavorite state based on whether the current product is favorited
+          setIsFavorite(JSON.parse(storedFavorites).some((fav) => fav.id === id));
+        }
+      } catch (error) {
+        console.error('Error fetching favorites:', error);
+      }
+    };
+
+    fetchFavorites();
+  }, [id]);
+
+  const toggleFavorite = async () => {
+    try {
+      const storedFavorites = await AsyncStorage.getItem('favorites');
+      const currentFavorites = storedFavorites ? JSON.parse(storedFavorites) : [];
   
-      // Update the list of favorited products
+      const isProductFavorited = currentFavorites.some((fav) => fav.id === id);
+      const newIsFavorite = !isProductFavorited;
+  
+      let newFavorites;
+  
       if (newIsFavorite) {
-        // Add the product to favorites
-        const newFavorites = [...favorites, { id, title, productImage, price, category }];
-        setFavorites(newFavorites);
-  
-        // Save the updated favorites to storage
-        AsyncStorage.setItem('favorites', JSON.stringify(newFavorites));
+        newFavorites = [...currentFavorites, { id, title, productImage, price, category }];
       } else {
-        // Remove the product from favorites
-        const updatedFavorites = favorites.filter((fav) => fav.id !== id);
-        setFavorites(updatedFavorites);
-  
-        // Save the updated favorites to storage
-        AsyncStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+        newFavorites = currentFavorites.filter((fav) => fav.id !== id);
       }
   
-      // Return the new value for setIsFavorite
-      return newIsFavorite;
-    });
+      await AsyncStorage.setItem('favorites', JSON.stringify(newFavorites));
+      setFavorites(newFavorites); // Update the state immediately
+      setIsFavorite(newIsFavorite);
+    } catch (error) {
+      console.error('Error updating favorites:', error);
+    }
   };
 
  const colors = [
