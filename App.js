@@ -83,7 +83,7 @@ export default function App(){
           options={{ drawerLabel: 'Product Detail', drawerLabelStyle: { fontSize: 18 } }}
         />         
         <Drawer.Screen
-          name="FavoriteScreen"
+          name="My favorites"
           component={FavoriteScreen} 
           options={{ drawerLabel: 'Favorite Screen', drawerLabelStyle: { fontSize: 18 } }}
         />      

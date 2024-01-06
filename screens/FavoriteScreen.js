@@ -36,31 +36,81 @@ const FavoritesScreen = () => {
       };
     
   return (
-    <View>
-    <Text>My Favorites</Text>
-    <FlatList
-      data={favorites}
-      keyExtractor={(item) => item.id.toString()}
-      renderItem={({ item }) => (
-        <View style={styles.itemContainer}>
-          <Image style={{ width: 100, height: 100 }} source={{ uri: item.productImage }} />
-          <Text>{item.title}</Text>
-          <TouchableOpacity onPress={() => removeFromFavorites(item.id)}>
-            <Icon name="heart" size={25} color="red" />
-          </TouchableOpacity>
-        </View>
-      )}
-    />
-  </View>
+    <View style={styles.container}>
+        <FlatList
+        data={favorites}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+            <View style={styles.favContainer}>
+                <View style={styles.itemContainer}>
+                    <Image style={{ width: 70, height: 70 }} source={{ uri: item.productImage }} />
+                    <Text style={styles.productTitle}
+                    >{item.title}</Text>
+                    <TouchableOpacity onPress={() => removeFromFavorites(item.id)}>
+                    <Icon name="heart" size={25} color="red" />
+                    </TouchableOpacity>
+                </View>
+                <TouchableOpacity style={styles.button}>
+                <Text style={styles.buttonText}>Add to Cart</Text>
+                </TouchableOpacity>
+            </View>
+        )}
+        />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-    itemContainer: {
-      flexDirection: 'row',
+    container: {
+        backgroundColor: '#fff',
+        width: '100%',
+        height: '100%',
+        paddingHorizontal: 20,
+        paddingVertical: 20,
+    },
+    favContainer: {
       alignItems: 'center',
       justifyContent: 'space-between',
-      marginBottom: 10,
+      marginBottom: 30,
+      borderWidth: 1,
+      padding: 10,
+      borderColor: '#ddd', 
+      borderRadius: 8,
+      ...Platform.select({
+        ios: {
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.1,
+          shadowRadius: 4,
+        },
+        android: {
+          elevation: 4,
+        },
+      }),
+  
+    },
+    itemContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%',
+        marginBottom: 20,
+        },
+
+    productTitle: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      width: 200,
+    },
+    button: {
+        backgroundColor: '#b3d1ff',
+        width: 300,
+        paddingVertical: 15,
+        borderRadius: 50,
+        alignItems: 'center',
+    },
+    buttonText: {
+        fontSize: 16,
     },
   });
 
