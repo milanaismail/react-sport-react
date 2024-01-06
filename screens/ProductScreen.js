@@ -37,7 +37,7 @@ const ProductScreen = ({ navigation }) => {
           let url;
           if (Platform.OS == 'android') {
             //ddev describe om port number te weten te komen
-            url = "http://10.0.2.2:55001/api/products/";
+            url = "http://10.0.2.2:64884/api/products/";
           }
           else {
             url = "http://sport.ddev.site/api/products/"

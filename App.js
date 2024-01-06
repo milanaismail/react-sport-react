@@ -6,7 +6,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
-import SkatesScreen from './screens/SkatesScreen';
 
 // Import your logo image
 import LogoImage from './assets/logo.png';
@@ -37,7 +36,7 @@ export default function App(){
         />                
         <Drawer.Screen
           name="Skates"
-          component={SkatesScreen}
+          component={ProductScreen}
           options={{
             drawerLabel: 'Skates',
             drawerLabelStyle: { fontSize: 12 },
