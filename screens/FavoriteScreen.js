@@ -1,6 +1,6 @@
 // FavoritesScreen.js
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -8,8 +8,6 @@ const FavoritesScreen = () => {
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    // Fetch favorited products from storage or database
-    // Example using AsyncStorage (you might need to adjust this based on your data structure)
     const fetchFavorites = async () => {
       try {
         const storedFavorites = await AsyncStorage.getItem('favorites');
@@ -32,7 +30,7 @@ const FavoritesScreen = () => {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View>
-            {/* Render favorited product details */}
+            <Image style={ { width: 100, height: 100 }} source={{ uri: item.productImage }} />
             <Text>{item.title}</Text>
           </View>
         )}
