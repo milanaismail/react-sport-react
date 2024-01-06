@@ -6,6 +6,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
+import ProductDetailScreen from './screens/ProductDetailScreen';
+
 
 // Import your logo image
 import LogoImage from './assets/logo.png';
@@ -71,9 +73,14 @@ export default function App(){
           component={HomeScreen}
           options={{
             drawerLabel: 'Contact',
-            drawerLabelStyle: { fontSize: 18 }, // Customize the font size here
+            drawerLabelStyle: { fontSize: 18 }, 
           }}
-        />                 
+        />        
+        <Drawer.Screen
+          name="ProductDetailScreen"
+          component={ProductDetailScreen} 
+          options={{ drawerLabel: 'Product Detail', drawerLabelStyle: { fontSize: 18 } }}
+        />         
         </Drawer.Navigator>
     </NavigationContainer>
   );
