@@ -1,11 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
 const ProductDetailScreen = ({ route }) => {
   const { id, title, productImage, price, category } = route.params;
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [favorites, setFavorites] = useState([]); // Add this line to define the favorites state
+
+
+  const toggleFavorite = () => {
+    // Use the callback version of setIsFavorite to ensure the latest state value
+    setIsFavorite((prevIsFavorite) => {
+      // Toggle the favorite status
+      const newIsFavorite = !prevIsFavorite;
+  
+      // Update the list of favorited products
+      if (newIsFavorite) {
+        // Add the product to favorites
+        const newFavorites = [...favorites, { id, title, productImage, price, category }];
+        setFavorites(newFavorites);
+  
+        // Save the updated favorites to storage
+        AsyncStorage.setItem('favorites', JSON.stringify(newFavorites));
+      } else {
+        // Remove the product from favorites
+        const updatedFavorites = favorites.filter((fav) => fav.id !== id);
+        setFavorites(updatedFavorites);
+  
+        // Save the updated favorites to storage
+        AsyncStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+      }
+  
+      // Return the new value for setIsFavorite
+      return newIsFavorite;
+    });
+  };
 
  const colors = [
     { label: 'Red', value: '#FF5733' },
@@ -16,8 +48,10 @@ const ProductDetailScreen = ({ route }) => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.productCategory}>Home / {category}</Text>
-        <Icon name="heart-o" size={25} color={'red'} style={styles.heartIcon} />
+        <Text style={styles.productCategory}>Products / {category}</Text>
+        <TouchableOpacity onPress={toggleFavorite}>
+           <Icon name={isFavorite ? 'heart' : 'heart-o'} size={25} color={isFavorite ? 'red' : 'red'} style={styles.heartIcon} />
+        </TouchableOpacity>  
         <Image style={styles.productImage} source={{ uri: productImage }} />
         <Text style={styles.productTitle}>{title}</Text>
         <Text style={styles.productPrice}>€ {price}</Text>

@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import ProductDetailScreen from './screens/ProductDetailScreen';
+import FavoriteScreen from './screens/FavoriteScreen';
 
 
 // Import your logo image
@@ -81,6 +82,11 @@ export default function App(){
           component={ProductDetailScreen} 
           options={{ drawerLabel: 'Product Detail', drawerLabelStyle: { fontSize: 18 } }}
         />         
+        <Drawer.Screen
+          name="FavoriteScreen"
+          component={FavoriteScreen} 
+          options={{ drawerLabel: 'Favorite Screen', drawerLabelStyle: { fontSize: 18 } }}
+        />      
         </Drawer.Navigator>
     </NavigationContainer>
   );
