@@ -124,6 +124,17 @@ const ProductDetailScreen = ({ route }) => {
     html: productDetail,
   }
 
+  const styleHtml = {
+    p:{
+      fontSize: 20,
+      fontWeight: 'bold',
+    },
+    li: {
+      fontSize: 16,
+      lineHeight: 24,
+    },
+  }
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
         <TouchableOpacity onPress={toggleFavorite}>
@@ -166,7 +177,10 @@ const ProductDetailScreen = ({ route }) => {
                 </TouchableOpacity>
             </View>
             <View style={styles.productOverview}>
-              <RenderHtml source={sourceHtml}/>
+              <RenderHtml 
+              source={sourceHtml}
+              tagsStyles={styleHtml}
+              />
             </View>
 
         </ScrollView>
