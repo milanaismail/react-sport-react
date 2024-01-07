@@ -24,11 +24,11 @@ const ProductStack = () => (
     initialRouteName="ProductScreen"
     screenOptions={({ route }) => ({
       headerStyle: {
-        backgroundColor: '#3498db', // Set your desired background color for the header
+        backgroundColor: '#b3d1ff',
       },
-      headerTintColor: '#fff', // Set the text color of the header
       headerTitleStyle: {
-        fontWeight: 'bold',
+        fontSize: 20,
+        fontWeight: '300',
       },
       headerShown: route.name === 'ProductScreen' ? false : true, // Hide the header for ProductScreen
     })}

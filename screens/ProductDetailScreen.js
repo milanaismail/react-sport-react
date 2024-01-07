@@ -70,7 +70,7 @@ const ProductDetailScreen = ({ route }) => {
             navigation.navigate('ProductScreen'); // Navigate to your Products screen
           }}
         >
-          <Text style={{ fontSize: 18, color: 'blue' }}>Products</Text>
+          <Text style={{ fontSize: 20, fontWeight:'bold', width:'100%' }}>Products</Text>
         </TouchableOpacity>
       ),
     });
@@ -78,7 +78,6 @@ const ProductDetailScreen = ({ route }) => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.productCategory}>Products / {category}</Text>
         <TouchableOpacity onPress={toggleFavorite}>
            <Icon name={isFavorite ? 'heart' : 'heart-o'} size={25} color={isFavorite ? 'red' : 'red'} style={styles.heartIcon} />
         </TouchableOpacity>  
@@ -147,16 +146,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor:'#fff',
     },
-    productCategory: {
-    fontSize: 20,
-    backgroundColor: '#b3d1ff',
-    color: 'black',
-    width: '100%',
-    paddingVertical: 20,
-    paddingLeft: 20,
-    marginBottom: 20,
-
-    },
     productImage: {
     width: 400,
     height: 400,
@@ -173,6 +162,7 @@ const styles = StyleSheet.create({
     },
     heartIcon: {
     marginLeft: 300,
+    marginTop: 20,
     },
     productSubWrapper: {
     width: '100%',
