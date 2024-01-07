@@ -10,9 +10,8 @@ import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import ProductDetailScreen from './screens/ProductDetailScreen';
 import FavoriteScreen from './screens/FavoriteScreen';
+import ShoppingScreen from './screens/ShoppingScreen';
 
-
-// Import your logo image
 import LogoImage from './assets/logo.png';
 import bag from './assets/market.png';
 
@@ -209,6 +208,25 @@ export default function App(){
         <Drawer.Screen
           name="My Favorites"
           component={FavoriteScreen} 
+          options={({ navigation }) => ({
+            headerStyle: {
+              backgroundColor: 'rgba(0,0,0,0.1)',
+            },
+            headerTitle: () => (
+              <Text style={{ fontSize: 20, fontWeight: 'bold', width: '100%' }}>My Favorites</Text>
+            ),
+            headerRight: () => (
+              <View style={{ flexDirection: 'row', marginRight: 16 }}>
+                <TouchableOpacity onPress={() => console.log('Bag icon pressed')}>
+                  <Image source={bag} style={{ width: 25, height: 25 }} />
+                </TouchableOpacity>
+              </View>
+            ),
+          })}
+        />    
+          <Drawer.Screen
+          name="My Shopping Cart"
+          component={ShoppingScreen} 
           options={({ navigation }) => ({
             headerStyle: {
               backgroundColor: 'rgba(0,0,0,0.1)',

@@ -7,9 +7,52 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const ProductDetailScreen = ({ route }) => {
   const { id, title, productImage, price, category } = route.params;
   const [isFavorite, setIsFavorite] = useState(false);
-  const [favorites, setFavorites] = useState([]); // Add this line to define the favorites state
+  const [favorites, setFavorites] = useState([]);
+  const [isShopping, setIsShopping] = useState(false);
+  const [shopping, setShopping] = useState([]);
   
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const fetchShopping = async () => {
+      try {
+        const storedShopping = await AsyncStorage.getItem('shopping');
+        if (storedShopping) {
+          setShopping(JSON.parse(storedShopping));
+
+          setIsShopping(JSON.parse(storedShopping).some((fav) => fav.id === id));
+        }
+      } catch (error) {
+        console.error('Error fetching shopping:', error);
+      }
+    };
+
+    fetchShopping();
+  }, [id]);
+
+  const addToCart = async () => {
+    try {
+      const storedShopping = await AsyncStorage.getItem('shopping');
+      const currentShopping = storedShopping ? JSON.parse(storedShopping) : [];
+
+      const isProductInCart = currentShopping.some((item) => item.id === id);
+      const newIsShopping = !isProductInCart;
+
+      let newShopping;
+
+      if (newIsShopping) {
+        newShopping = [...currentShopping, { id, title, productImage, price, category }];
+      } else {
+        newShopping = currentShopping.filter((item) => item.id !== id);
+      }
+
+      await AsyncStorage.setItem('shopping', JSON.stringify(newShopping));
+      setShopping(newShopping);
+      setIsShopping(newIsShopping);
+    } catch (error) {
+      console.error('Error updating shopping cart:', error);
+    }
+  };
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -18,7 +61,6 @@ const ProductDetailScreen = ({ route }) => {
         if (storedFavorites) {
           setFavorites(JSON.parse(storedFavorites));
 
-          // Set the initial isFavorite state based on whether the current product is favorited
           setIsFavorite(JSON.parse(storedFavorites).some((fav) => fav.id === id));
         }
       } catch (error) {
@@ -46,7 +88,7 @@ const ProductDetailScreen = ({ route }) => {
       }
   
       await AsyncStorage.setItem('favorites', JSON.stringify(newFavorites));
-      setFavorites(newFavorites); // Update the state immediately
+      setFavorites(newFavorites); 
       setIsFavorite(newIsFavorite);
     } catch (error) {
       console.error('Error updating favorites:', error);
@@ -67,7 +109,7 @@ const ProductDetailScreen = ({ route }) => {
         <TouchableOpacity
           style={{ marginLeft: 10, marginRight: 10  }}
           onPress={() => {
-            navigation.navigate('ProductScreen'); // Navigate to your Products screen
+            navigation.navigate('ProductScreen'); 
           }}
         >
           <Text style={{ fontSize: 20, fontWeight:'bold', width:'100%' }}>Products</Text>
@@ -113,7 +155,7 @@ const ProductDetailScreen = ({ route }) => {
                         <Text style={styles.quantity}>+</Text>
                 </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={addToCart}>
                     <Text style={styles.buttonText}>Add to Cart</Text>
                 </TouchableOpacity>
             </View>
