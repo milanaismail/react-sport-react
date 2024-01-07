@@ -37,6 +37,7 @@ const FavoritesScreen = () => {
     
   return (
     <View style={styles.container}>
+        <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 20 }}>My Favorites</Text>
         <FlatList
         data={favorites}
         keyExtractor={(item) => item.id.toString()}

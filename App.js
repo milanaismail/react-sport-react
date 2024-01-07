@@ -19,6 +19,7 @@ import LogoImage from './assets/logo.png';
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
+
 const ProductStack = () => (
   <Stack.Navigator
     initialRouteName="ProductScreen"
@@ -47,56 +48,98 @@ export default function App(){
           name="Home"
           component={HomeScreen}
           options={{
-            drawerLabel: 'Home',
-            drawerLabelStyle: { fontSize: 18 }, 
+            headerTitle: () => (
+              <Image
+                source={LogoImage}
+                style={{ width: 90, height: 40, resizeMode: 'contain' }}
+              />
+            ),
           }}
-        />           
-      <Drawer.Screen name="Products" component={ProductStack} />        
+        />  
+      <Drawer.Screen 
+          name="Products" 
+          component={ProductStack} 
+          options={{
+            headerTitle: () => (
+              <Image
+                source={LogoImage}
+                style={{ width: 90, height: 40, resizeMode: 'contain' }}
+              />
+            ),
+          }}
+        />         
         <Drawer.Screen
           name="Skates"
           component={ProductScreen}
           options={{
-            drawerLabel: 'Skates',
-            drawerLabelStyle: { fontSize: 12 },
+            headerTitle: () => (
+              <Image
+                source={LogoImage}
+                style={{ width: 90, height: 40, resizeMode: 'contain' }}
+              />
+            ),
           }}
-        />        
+        />  
         <Drawer.Screen
           name="Sticks"
           component={ProductScreen}
           options={{
-            drawerLabel: 'Sticks',
-            drawerLabelStyle: { fontSize: 12 }, 
+            headerTitle: () => (
+              <Image
+                source={LogoImage}
+                style={{ width: 90, height: 40, resizeMode: 'contain' }}
+              />
+            ),
           }}
-        />
+        />  
         <Drawer.Screen
           name="Helmets"
           component={ProductScreen}
           options={{
-            drawerLabel: 'Helmets',
-            drawerLabelStyle: { fontSize: 12 }, 
+            headerTitle: () => (
+              <Image
+                source={LogoImage}
+                style={{ width: 90, height: 40, resizeMode: 'contain' }}
+              />
+            ),
           }}
-        />        
+        />       
         <Drawer.Screen
           name="About Us"
           component={HomeScreen}
           options={{
-            drawerLabel: 'About Us',
-            drawerLabelStyle: { fontSize: 18 }, 
+            headerTitle: () => (
+              <Image
+                source={LogoImage}
+                style={{ width: 90, height: 40, resizeMode: 'contain' }}
+              />
+            ),
           }}
-        />                   
+        />               
         <Drawer.Screen
           name="Contact"
           component={HomeScreen}
           options={{
-            drawerLabel: 'Contact',
-            drawerLabelStyle: { fontSize: 18 }, 
+            headerTitle: () => (
+              <Image
+                source={LogoImage}
+                style={{ width: 90, height: 40, resizeMode: 'contain' }}
+              />
+            ),
           }}
-        />            
+        />           
         <Drawer.Screen
-          name="My favorites"
+          name="My Favorites"
           component={FavoriteScreen} 
-          options={{ drawerLabel: 'Favorite Screen', drawerLabelStyle: { fontSize: 18 } }}
-        />      
+          options={{
+            headerTitle: () => (
+              <Image
+                source={LogoImage}
+                style={{ width: 90, height: 40, resizeMode: 'contain' }}
+              />
+            ),
+          }}
+        />    
         </Drawer.Navigator>
     </NavigationContainer>
   );
