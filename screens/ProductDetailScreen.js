@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'rea
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { HTML } from 'react-native-render-html';
+import RenderHtml from 'react-native-render-html';
 
 
 const ProductDetailScreen = ({ route }) => {
@@ -120,6 +120,10 @@ const ProductDetailScreen = ({ route }) => {
     });
   }, [navigation, category]);
 
+  const sourceHtml = {
+    html: productDetail,
+  }
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
         <TouchableOpacity onPress={toggleFavorite}>
@@ -162,7 +166,7 @@ const ProductDetailScreen = ({ route }) => {
                 </TouchableOpacity>
             </View>
             <View style={styles.productOverview}>
-               <Text >{productDetail}</Text>
+              <RenderHtml source={sourceHtml}/>
             </View>
 
         </ScrollView>
@@ -295,8 +299,7 @@ const styles = StyleSheet.create({
     listText: {
     fontSize: 16,
     },
-
-
+  
 });
 
 export default ProductDetailScreen;
