@@ -26,7 +26,7 @@ const ShoppingScreen = () => {
 
     const removeFromShopping = async (itemId) => {
         try {
-          const updatedShopping = Shopping.filter((fav) => fav.id !== itemId);
+          const updatedShopping = shopping.filter((fav) => fav.id !== itemId);
           setShopping(updatedShopping);
           await AsyncStorage.setItem('shopping', JSON.stringify(updatedShopping));
         } catch (error) {

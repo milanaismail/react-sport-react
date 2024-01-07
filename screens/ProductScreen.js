@@ -79,9 +79,6 @@ const ProductScreen = ({ navigation }) => {
                   if (Platform.OS == 'android') {
                     item.productImage = item.productImage.replace('sport.ddev.site', '10.0.2.2:55001');
                   }
-
-                      console.log('Category Title:', item.categoryTitle);
-
                     return <Product
                       id={item.id}
                       title={item.title}
@@ -89,6 +86,7 @@ const ProductScreen = ({ navigation }) => {
                       price={item.price}
                       navigation={navigation}
                       category={item.categoryTitle}
+                      productDetail={item.productDetail}
                       onPress={() =>
                         navigation.navigate('ProductDetailScreen', {
                           id: item.id,
@@ -96,6 +94,7 @@ const ProductScreen = ({ navigation }) => {
                           productImage: item.productImage,
                           price: item.price,
                           category: item.categoryTitle,
+                          productDetail: item.productDetail,
                         })
                       }
                       />

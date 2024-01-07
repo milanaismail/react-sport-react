@@ -3,9 +3,11 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'rea
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { HTML } from 'react-native-render-html';
+
 
 const ProductDetailScreen = ({ route }) => {
-  const { id, title, productImage, price, category } = route.params;
+  const { id, title, productImage, price, category, productDetail} = route.params;
   const [isFavorite, setIsFavorite] = useState(false);
   const [favorites, setFavorites] = useState([]);
   const [isShopping, setIsShopping] = useState(false);
@@ -96,7 +98,7 @@ const ProductDetailScreen = ({ route }) => {
   };
 
  const colors = [
-    { label: 'Red', value: '#FF5733' },
+    { label: 'Black', value: '#000000' },
     { label: 'Green', value: '#33FF57' },
     { label: 'Blue', value: '#5733FF' },
     { label: 'Yellow', value: '#FFFF33' },
@@ -160,23 +162,7 @@ const ProductDetailScreen = ({ route }) => {
                 </TouchableOpacity>
             </View>
             <View style={styles.productOverview}>
-                <Text style={styles.productOverviewTitle}>Product Overview</Text>
-
-                <Text style={styles.overviewText}>The HYPERLITE 2 HELMET is the most advanced helmet we’ve ever built. Engineered for the elite and pro-inspired player who doesn’t want to compromise on comfort, protection, or performance, the HYPERLITE 2 HELMET offers an optimum level of performance in a state-of-the-art package.</Text>
-
-                <Text style={styles.subTitle}>KEY FEATURES:</Text>
-                
-                <Text style={styles.listTitle}>• GX-POD </Text>
-                <Text style={styles.overviewText}>- Experience premium comfort & ventilation with a revolutionary 3D printed structure built to manage low, mid, and high-energy impacts.</Text>
-
-                <Text style={styles.listTitle}>• Occipital Lock </Text>
-                <Text style={styles.overviewText}>- Stay dialed-in to the moment with the Occipital Lock + FreeForm Adjustment system allowing for easy, independent length and width adjustments.</Text>
-
-                <Text style={styles.listTitle}>• Elite Ventilation </Text>
-                <Text style={styles.overviewText}> - Feel the improved air flow from strategically placed exterior vents that match the GX-POD integration.</Text>
-
-                <Text style={styles.listTitle}>• FreeForm Adjustment System </Text>
-                <Text style={styles.overviewText}> – Independent length and width adjustments allow you to create a customized fit.</Text>
+               <Text >{productDetail}</Text>
             </View>
 
         </ScrollView>
