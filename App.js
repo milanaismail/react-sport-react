@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createStackNavigator } from '@react-navigation/stack';
+
 import { Image, TouchableOpacity, View, Text, Modal, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -15,6 +17,26 @@ import LogoImage from './assets/logo.png';
 
 
 const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator();
+
+const ProductStack = () => (
+  <Stack.Navigator
+    initialRouteName="ProductScreen"
+    screenOptions={({ route }) => ({
+      headerStyle: {
+        backgroundColor: '#3498db', // Set your desired background color for the header
+      },
+      headerTintColor: '#fff', // Set the text color of the header
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+      headerShown: route.name === 'ProductScreen' ? false : true, // Hide the header for ProductScreen
+    })}
+    >
+    <Stack.Screen name="ProductScreen" component={ProductScreen} />
+    <Stack.Screen name="ProductDetailScreen" component={ProductDetailScreen} />
+  </Stack.Navigator>
+);
 
 
 export default function App(){
@@ -29,14 +51,7 @@ export default function App(){
             drawerLabelStyle: { fontSize: 18 }, 
           }}
         />           
-        <Drawer.Screen
-          name="Products"
-          component={ProductScreen}
-          options={{
-            drawerLabel: 'Products',
-            drawerLabelStyle: { fontSize: 18 }, 
-          }}
-        />                
+      <Drawer.Screen name="Products" component={ProductStack} />        
         <Drawer.Screen
           name="Skates"
           component={ProductScreen}
@@ -76,12 +91,7 @@ export default function App(){
             drawerLabel: 'Contact',
             drawerLabelStyle: { fontSize: 18 }, 
           }}
-        />        
-        <Drawer.Screen
-          name="ProductDetailScreen"
-          component={ProductDetailScreen} 
-          options={{ drawerLabel: 'Product Detail', drawerLabelStyle: { fontSize: 18 } }}
-        />         
+        />            
         <Drawer.Screen
           name="My favorites"
           component={FavoriteScreen} 

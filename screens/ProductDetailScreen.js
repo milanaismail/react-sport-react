@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-
 
 const ProductDetailScreen = ({ route }) => {
   const { id, title, productImage, price, category } = route.params;
   const [isFavorite, setIsFavorite] = useState(false);
   const [favorites, setFavorites] = useState([]); // Add this line to define the favorites state
-
+  
+  const navigation = useNavigation();
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -59,6 +59,22 @@ const ProductDetailScreen = ({ route }) => {
     { label: 'Blue', value: '#5733FF' },
     { label: 'Yellow', value: '#FFFF33' },
   ];
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: `/ ${category}`,
+      headerLeft: () => (
+        <TouchableOpacity
+          style={{ marginLeft: 10, marginRight: 10  }}
+          onPress={() => {
+            navigation.navigate('ProductScreen'); // Navigate to your Products screen
+          }}
+        >
+          <Text style={{ fontSize: 18, color: 'blue' }}>Products</Text>
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation, category]);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
