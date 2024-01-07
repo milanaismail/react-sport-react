@@ -48,7 +48,7 @@ const FavoritesScreen = () => {
                     <Text style={styles.productTitle}
                     >{item.title}</Text>
                     <TouchableOpacity onPress={() => removeFromFavorites(item.id)}>
-                    <Icon name="heart" size={25} color="red" />
+                    <Icon name="minus-circle" size={25} color="blue" />
                     </TouchableOpacity>
                 </View>
                 <TouchableOpacity style={styles.button}>

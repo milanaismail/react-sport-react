@@ -106,9 +106,7 @@ const ProductScreen = ({ navigation }) => {
       }, [selectedCategory]);*/
 
     return (  
-      <View style={styles.container}>
-          <Text style={styles.shopTitle}>All Products</Text>
-         
+      <View style={styles.container}>         
             <Filter onSortChange={handleSortChange} />
             <FlatList
                 data={sortedProducts}
@@ -150,14 +148,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: '100%',
   },
-  shopTitle: {
-    fontSize: 30,
-    fontWeight: 'bold', 
-    backgroundColor: 'rgba(0,0,0,0.1)',
-    width: '100%',
-    textAlign: 'center',
-    paddingVertical: 24,
-  }
+
 });
 
 
