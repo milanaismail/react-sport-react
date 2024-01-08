@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, TextInput, Platform } from 'react-native';
+import { StyleSheet, View, FlatList, Platform } from 'react-native';
 import Filter from '../components/Filter';
 import Product from '../components/Product';
 
