@@ -7,7 +7,7 @@ const ProductScreen = ({ route, navigation }) => {
   const [products, setProducts] = useState([]);
   const [sortedProducts, setSortedProducts] = useState([]);
   const [sortValue, setSortValue] = useState('0');
-  const categoryTitle = route.params?.categoryTitle; // 
+  const categoryTitle = route.params?.categoryTitle; 
 
     const getProduct = async () => {
         try {
