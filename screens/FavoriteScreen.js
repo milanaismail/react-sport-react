@@ -7,6 +7,32 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const FavoritesScreen = () => {
   const [favorites, setFavorites] = useState([]);
+  const [isShopping, setIsShopping] = useState(false);
+  const [shopping, setShopping] = useState([]);
+
+  const addToCart = async (id, title, productImage, price, category) => {
+    try {
+      const storedShopping = await AsyncStorage.getItem('shopping');
+      const currentShopping = storedShopping ? JSON.parse(storedShopping) : [];
+  
+      const isProductInCart = currentShopping.some((item) => item.id === id);
+      const newIsShopping = !isProductInCart;
+  
+      let newShopping;
+  
+      if (newIsShopping) {
+        newShopping = [...currentShopping, { id, title, productImage, price, category }];
+      } else {
+        newShopping = currentShopping.filter((item) => item.id !== id);
+      }
+  
+      await AsyncStorage.setItem('shopping', JSON.stringify(newShopping));
+      setShopping(newShopping);
+      setIsShopping(newIsShopping);
+    } catch (error) {
+      console.error('Error updating shopping cart:', error);
+    }
+  };
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -37,6 +63,10 @@ const FavoritesScreen = () => {
     
   return (
     <View style={styles.container}>
+       <View style={styles.favHeader}>
+                <Text style={styles.headerText}>Product</Text>
+                <Text style={styles.headerText}>Total</Text>
+            </View>
         <FlatList
         data={favorites}
         keyExtractor={(item) => item.id.toString()}
@@ -47,14 +77,17 @@ const FavoritesScreen = () => {
                     <View>
                         <Text style={styles.productTitle}
                         >{item.title}</Text>
-                        <Text>€ {item.price}</Text>
+                        <TouchableOpacity onPress={() => removeFromFavorites(item.id)}>
+                            <Icon name="trash" size={25} color="blue" />
+                        </TouchableOpacity>
                     </View>
-                    <TouchableOpacity onPress={() => removeFromFavorites(item.id)}>
-                    <Icon name="trash" size={25} color="blue" />
-                    </TouchableOpacity>
+                      <Text>€ {item.price}</Text>
                 </View>
-                <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText}>Add to Cart</Text>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => addToCart(item.id, item.title, item.productImage, item.price, item.category)}
+                >
+                  <Text style={styles.buttonText}>Add to Cart</Text>
                 </TouchableOpacity>
             </View>
         )}
@@ -74,12 +107,22 @@ const styles = StyleSheet.create({
     favContainer: {
       alignItems: 'center',
       justifyContent: 'space-between',
-      marginBottom: 30,
-      borderWidth: 1,
-      borderColor: '#ddd', 
-      borderRadius: 8, 
+      borderBottomWidth: 1,
       padding: 10,
-    
+      borderColor: '#ddd', 
+    },
+    favHeader: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      padding: 10,
+      borderColor: '#ddd', 
+      borderBottomWidth: 1,
+    },
+    headerText: {
+      fontSize: 16,
+      fontWeight: '600',
+      marginTop: 12,
     },
     itemContainer: {
         flexDirection: 'row',
@@ -92,17 +135,20 @@ const styles = StyleSheet.create({
     productTitle: {
       fontSize: 16,
       fontWeight: 'bold',
-      width: 200,
+      width: 180,
+      marginBottom: 5,
     },
     button: {
-        backgroundColor: '#b3d1ff',
-        width: 300,
-        paddingVertical: 15,
-        borderRadius: 50,
-        alignItems: 'center',
+      backgroundColor: '#b3d1ff',
+      width: 300,
+      paddingVertical: 15,
+      borderRadius: 50,
+      alignItems: 'center',
+      marginTop: 30,
     },
     buttonText: {
-        fontSize: 16,
+      fontSize: 16,
+      fontWeight: 'bold',
     },
   });
 

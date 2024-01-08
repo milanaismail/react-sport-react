@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import RenderHtml from 'react-native-render-html';
+import { useWindowDimensions } from 'react-native';
 
 
 const ProductDetailScreen = ({ route }) => {
@@ -152,6 +153,9 @@ const ProductDetailScreen = ({ route }) => {
     },
   }
 
+  const windowWidth = useWindowDimensions().width;
+
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
         <TouchableOpacity onPress={toggleFavorite}>
@@ -165,7 +169,7 @@ const ProductDetailScreen = ({ route }) => {
                 <View style={styles.colorContainer}>
                     {colors.map((color, index) => (
                     <View key={index} style={styles.colorItem}>
-                        <View style={[styles.colorCircle, { backgroundColor: color.value }]} />
+                    <View style={[styles.colorCircle, { backgroundColor: color }]} />
                         <Text style={styles.colorLabel}>{color.label}</Text>
                     </View>
                     ))}
@@ -196,6 +200,7 @@ const ProductDetailScreen = ({ route }) => {
             <View style={styles.productOverview}>
               <RenderHtml 
               source={sourceHtml}
+              contentWidth={windowWidth}
               tagsStyles={styleHtml}
               />
             </View>
