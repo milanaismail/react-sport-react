@@ -67,7 +67,7 @@ export default function App(){
                 <TouchableOpacity onPress={() => navigation.navigate('My Favorites')}>
                   <Icon name="heart-o" size={25} color="black" style={{ marginRight: 15 }} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => console.log('Bag icon pressed')}>
+                <TouchableOpacity onPress={() => navigation.navigate('My Shopping Cart')}>
                   <Image source={bag} style={{ width: 25, height: 25 }} />
                 </TouchableOpacity>
               </View>
@@ -89,7 +89,7 @@ export default function App(){
                 <TouchableOpacity onPress={() => navigation.navigate('My Favorites')}>
                   <Icon name="heart-o" size={25} color="black" style={{ marginRight: 15 }} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => console.log('Bag icon pressed')}>
+                <TouchableOpacity onPress={() => navigation.navigate('My Shopping Cart')}>
                   <Image source={bag} style={{ width: 25, height: 25 }} />
                 </TouchableOpacity>
               </View>
@@ -114,7 +114,7 @@ export default function App(){
                 <TouchableOpacity onPress={() => navigation.navigate('My Favorites')}>
                   <Icon name="heart-o" size={25} color="black" style={{ marginRight: 15 }} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => console.log('Bag icon pressed')}>
+                <TouchableOpacity onPress={() => navigation.navigate('My Shopping Cart')}>
                   <Image source={bag} style={{ width: 25, height: 25 }} />
                 </TouchableOpacity>
               </View>
@@ -139,7 +139,7 @@ export default function App(){
                   <TouchableOpacity onPress={() => navigation.navigate('My Favorites')}>
                     <Icon name="heart-o" size={25} color="black" style={{ marginRight: 15 }} />
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={() => console.log('Bag icon pressed')}>
+                  <TouchableOpacity onPress={() => navigation.navigate('My Shopping Cart')}>
                     <Image source={bag} style={{ width: 25, height: 25 }} />
                   </TouchableOpacity>
                 </View>
@@ -164,7 +164,7 @@ export default function App(){
                 <TouchableOpacity onPress={() => navigation.navigate('My Favorites')}>
                   <Icon name="heart-o" size={25} color="black" style={{ marginRight: 15 }} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => console.log('Bag icon pressed')}>
+                <TouchableOpacity onPress={() => navigation.navigate('My Shopping Cart')}>
                   <Image source={bag} style={{ width: 25, height: 25 }} />
                 </TouchableOpacity>
               </View>
@@ -207,7 +207,7 @@ export default function App(){
             ),
             headerRight: () => (
               <View style={{ flexDirection: 'row', marginRight: 16 }}>
-                <TouchableOpacity onPress={() => console.log('Bag icon pressed')}>
+                <TouchableOpacity onPress={() => navigation.navigate('My Shopping Cart')}>
                   <Image source={bag} style={{ width: 25, height: 25 }} />
                 </TouchableOpacity>
               </View>
@@ -226,7 +226,7 @@ export default function App(){
             ),
             headerRight: () => (
               <View style={{ flexDirection: 'row', marginRight: 16 }}>
-                <TouchableOpacity onPress={() => console.log('Bag icon pressed')}>
+                <TouchableOpacity onPress={() => navigation.navigate('My Favorites')}>
                 <Icon name="heart-o" size={25} color="black" style={{ marginRight: 15 }} />
                 </TouchableOpacity>
               </View>

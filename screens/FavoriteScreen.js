@@ -44,10 +44,13 @@ const FavoritesScreen = () => {
             <View style={styles.favContainer}>
                 <View style={styles.itemContainer}>
                     <Image style={{ width: 70, height: 70 }} source={{ uri: item.productImage }} />
-                    <Text style={styles.productTitle}
-                    >{item.title}</Text>
+                    <View>
+                        <Text style={styles.productTitle}
+                        >{item.title}</Text>
+                        <Text>€ {item.price}</Text>
+                    </View>
                     <TouchableOpacity onPress={() => removeFromFavorites(item.id)}>
-                    <Icon name="minus-circle" size={25} color="blue" />
+                    <Icon name="trash" size={25} color="blue" />
                     </TouchableOpacity>
                 </View>
                 <TouchableOpacity style={styles.button}>
@@ -73,18 +76,18 @@ const styles = StyleSheet.create({
       justifyContent: 'space-between',
       marginBottom: 30,
       borderWidth: 1,
-      padding: 10,
       borderColor: '#ddd', 
       borderRadius: 8, 
+      padding: 10,
     
     },
     itemContainer: {
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'space-between',
         width: '100%',
-        marginBottom: 20,
-        },
+        padding: 10,
+    },
 
     productTitle: {
       fontSize: 16,
