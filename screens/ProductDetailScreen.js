@@ -142,6 +142,16 @@ const ProductDetailScreen = ({ route }) => {
     html: productDetail,
   }
 
+  const MemoizedRenderHtml = React.memo(({ sourceHtml, windowWidth, styleHtml }) => {
+    return (
+      <RenderHtml
+        source={sourceHtml}
+        contentWidth={windowWidth}
+        tagsStyles={styleHtml}
+      />
+    );
+  });
+
   const styleHtml = {
     p:{
       fontSize: 20,
@@ -167,12 +177,16 @@ const ProductDetailScreen = ({ route }) => {
             <View style={styles.productSubWrapper}>
                 <Text style={styles.sizeTitle}>Color</Text>
                 <View style={styles.colorContainer}>
-                    {colors.map((color, index) => (
-                    <View key={index} style={styles.colorItem}>
-                    <View style={[styles.colorCircle, { backgroundColor: color }]} />
-                        <Text style={styles.colorLabel}>{color.label}</Text>
+                {colors.map((color, index) => {
+                  const backgroundColor = color.value; // Extract the color value
+
+                  return (
+                    <View key={index} style={[styles.colorItem]}>
+                      <View style={[styles.colorCircle, { backgroundColor }]} />
+                      <Text style={styles.colorLabel}>{color.label}</Text>
                     </View>
-                    ))}
+                  );
+                })}
                 </View>
                 <Text style={styles.sizeTitle}>Size</Text>
                 <View style={styles.sizeLabel}>
@@ -198,11 +212,11 @@ const ProductDetailScreen = ({ route }) => {
                 </TouchableOpacity>
             </View>
             <View style={styles.productOverview}>
-              <RenderHtml 
-              source={sourceHtml}
-              contentWidth={windowWidth}
-              tagsStyles={styleHtml}
-              />
+            <MemoizedRenderHtml 
+          sourceHtml={sourceHtml}
+          windowWidth={windowWidth}
+          styleHtml={styleHtml}
+        />
             </View>
 
         </ScrollView>

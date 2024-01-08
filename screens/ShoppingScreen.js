@@ -12,12 +12,12 @@ const ShoppingScreen = () => {
 
   useEffect(() => {
     const calculateSubtotal = () => {
-      const total = shopping.reduce((acc, item) => acc + item.price, 0);
+      const total = shopping.reduce((acc, item) => acc + (item.price * (quantity[item.id] || 1)), 0);
       setSubtotal(total);
     };
   
     calculateSubtotal();
-  }, [shopping]);
+  }, [shopping, quantity]);
 
   useEffect(() => {
     const fetchShopping = async () => {
@@ -105,7 +105,7 @@ const ShoppingScreen = () => {
                                             </TouchableOpacity>
                                         </View>
                                     </View>
-                                <Text> € {item.price}</Text>
+                                    <Text> € {(item.price * (quantity[item.id] || 1)).toFixed(2)}</Text>
                                 </View>
                         </View>
                 )}
