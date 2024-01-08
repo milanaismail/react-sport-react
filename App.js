@@ -1,74 +1,263 @@
-import React from 'react';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React, { useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Image, TouchableOpacity, View, Text } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import { Image, TouchableOpacity, View, Text, Modal, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
+import ProductDetailScreen from './screens/ProductDetailScreen';
+import FavoriteScreen from './screens/FavoriteScreen';
+import ShoppingScreen from './screens/ShoppingScreen';
 
-// Import your logo image
-import LogoImage from './assets/favicon.png';
+import LogoImage from './assets/logo.png';
+import bag from './assets/market.png';
 
-const Stack = createNativeStackNavigator();
 
-const CustomHeader = () => {
-  const navigation = useNavigation();
+const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator();
+
+
+const ProductStack = () => (
+  <Stack.Navigator
+    initialRouteName="ProductScreen"
+    screenOptions={({ route }) => ({
+      headerStyle: {
+        backgroundColor: '#b3d1ff',
+      },
+      headerTitleStyle: {
+        fontSize: 20,
+        fontWeight: '300',
+      },
+      headerShown: route.name === 'ProductScreen' ? false : true, // Hide the header for ProductScreen
+    })}
+    >
+    <Stack.Screen name="ProductScreen" component={ProductScreen} />
+    <Stack.Screen name="ProductDetailScreen" component={ProductDetailScreen} />
+  </Stack.Navigator>
+);
+
+
+export default function App(){
   return (
-    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-      {/* Hamburger menu icon */}
-      <TouchableOpacity
-        style={{ marginLeft: 10 }}
-        onPress={() => navigation.toggleDrawer()}
-      >
-        <Icon name="bars" size={30} color="#000" />
-      </TouchableOpacity>
-
-      {/* Logo */}
-      <Image source={LogoImage} style={{ width: 100, height: 40, marginLeft: 10 }} />
-
-      {/* Search icon */}
-      <TouchableOpacity
-        style={{ marginLeft: 'auto', marginRight: 10 }}
-        onPress={() => {
-          // Add your search logic here
-        }}
-      >
-        <Icon name="search" size={20} color="#000" />
-      </TouchableOpacity>
-
-      {/* Bag icon */}
-      <TouchableOpacity
-        onPress={() => {
-          // Add your bag logic here
-        }}
-      >
-        <Icon name="shopping-bag" size={20} color="#000" style={{ marginRight: 10 }} />
-      </TouchableOpacity>
-    </View>
-  );
-};
-
-const App = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator
+      <NavigationContainer>
+      <Drawer.Navigator
+        initialRouteName="Home"
         screenOptions={{
-          headerTitle: () => <CustomHeader />,
-          headerTitleAlign: 'center',
-          headerStyle: {
-            backgroundColor: '#b3d1ff',
+          drawerLabelStyle: {
+            fontSize: 18,
+            fontWeight: 'bold',
           },
-          headerTintColor: '#000',
         }}
       >
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Product" component={ProductScreen} />
-      </Stack.Navigator>
+      <Drawer.Screen
+          name="Home"
+          component={HomeScreen}
+          options={({ navigation }) => ({
+            headerTitle: () => (
+              <Image
+                source={LogoImage}
+                style={{ width: 90, height: 40, resizeMode: 'contain' }}
+              />            
+            ),
+            headerRight: () => (
+              <View style={{ flexDirection: 'row', marginRight: 16 }}>
+                <TouchableOpacity onPress={() => navigation.navigate('My Favorites')}>
+                  <Icon name="heart-o" size={25} color="black" style={{ marginRight: 15 }} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('My Shopping Cart')}>
+                  <Image source={bag} style={{ width: 25, height: 25 }} />
+                </TouchableOpacity>
+              </View>
+            ),
+          })}
+        />
+        <Drawer.Screen
+          name="Products"
+          component={ProductStack}
+          options={({ navigation }) => ({
+            headerStyle: {
+              backgroundColor: 'rgba(0,0,0,0.1)',
+            },
+            headerTitle: () => (
+              <Text style={{ fontSize: 20, fontWeight: 'bold', width: '100%' }}>All Products</Text>
+            ),
+            headerRight: () => (
+              <View style={{ flexDirection: 'row', marginRight: 16 }}>
+                <TouchableOpacity onPress={() => navigation.navigate('My Favorites')}>
+                  <Icon name="heart-o" size={25} color="black" style={{ marginRight: 15 }} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('My Shopping Cart')}>
+                  <Image source={bag} style={{ width: 25, height: 25 }} />
+                </TouchableOpacity>
+              </View>
+            ),
+          })}
+        />
+        <Drawer.Screen
+          name="Skates"
+          component={ProductScreen}
+          options={({ navigation }) => ({
+            headerTitle: () => (
+              <Image
+                source={LogoImage}
+                style={{ width: 90, height: 40, resizeMode: 'contain' }}
+              />
+            ),
+            drawerLabelStyle: {
+              fontSize: 16, 
+            },
+            headerRight: () => (
+              <View style={{ flexDirection: 'row', marginRight: 16 }}>
+                <TouchableOpacity onPress={() => navigation.navigate('My Favorites')}>
+                  <Icon name="heart-o" size={25} color="black" style={{ marginRight: 15 }} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('My Shopping Cart')}>
+                  <Image source={bag} style={{ width: 25, height: 25 }} />
+                </TouchableOpacity>
+              </View>
+            ),
+          })}
+        />
+        <Drawer.Screen
+          name="Sticks"
+          component={ProductScreen}
+          options={({ navigation }) => ({
+            headerTitle: () => (
+              <Image
+                source={LogoImage}
+                style={{ width: 90, height: 40, resizeMode: 'contain' }}
+              />
+              ),
+              drawerLabelStyle: {
+                fontSize: 16, 
+              },
+              headerRight: () => (
+                <View style={{ flexDirection: 'row', marginRight: 16 }}>
+                  <TouchableOpacity onPress={() => navigation.navigate('My Favorites')}>
+                    <Icon name="heart-o" size={25} color="black" style={{ marginRight: 15 }} />
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => navigation.navigate('My Shopping Cart')}>
+                    <Image source={bag} style={{ width: 25, height: 25 }} />
+                  </TouchableOpacity>
+                </View>
+              ),
+            })}
+          />
+        <Drawer.Screen
+          name="Helmets"
+          component={ProductScreen}
+          options={({ navigation }) => ({
+            headerTitle: () => (
+              <Image
+                source={LogoImage}
+                style={{ width: 90, height: 40, resizeMode: 'contain' }}
+              />
+            ),
+            drawerLabelStyle: {
+              fontSize: 16, 
+            },
+            headerRight: () => (
+              <View style={{ flexDirection: 'row', marginRight: 16 }}>
+                <TouchableOpacity onPress={() => navigation.navigate('My Favorites')}>
+                  <Icon name="heart-o" size={25} color="black" style={{ marginRight: 15 }} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('My Shopping Cart')}>
+                  <Image source={bag} style={{ width: 25, height: 25 }} />
+                </TouchableOpacity>
+              </View>
+            ),
+          })}
+        />   
+        <Drawer.Screen
+          name="About Us"
+          component={HomeScreen}
+          options={{
+            headerTitle: () => (
+              <Image
+                source={LogoImage}
+                style={{ width: 90, height: 40, resizeMode: 'contain' }}
+              />
+            ),
+          }}
+        />               
+        <Drawer.Screen
+          name="Contact"
+          component={HomeScreen}
+          options={{
+            headerTitle: () => (
+              <Image
+                source={LogoImage}
+                style={{ width: 90, height: 40, resizeMode: 'contain' }}
+              />
+            ),
+          }}
+        />           
+        <Drawer.Screen
+          name="My Favorites"
+          component={FavoriteScreen} 
+          options={({ navigation }) => ({
+            headerStyle: {
+              backgroundColor: 'rgba(0,0,0,0.1)',
+            },
+            headerTitle: () => (
+              <Text style={{ fontSize: 20, fontWeight: 'bold', width: '100%' }}>My Favorites</Text>
+            ),
+            headerRight: () => (
+              <View style={{ flexDirection: 'row', marginRight: 16 }}>
+                <TouchableOpacity onPress={() => navigation.navigate('My Shopping Cart')}>
+                  <Image source={bag} style={{ width: 25, height: 25 }} />
+                </TouchableOpacity>
+              </View>
+            ),
+          })}
+        />    
+          <Drawer.Screen
+          name="My Shopping Cart"
+          component={ShoppingScreen} 
+          options={({ navigation }) => ({
+            headerStyle: {
+              backgroundColor: 'rgba(0,0,0,0.1)',
+            },
+            headerTitle: () => (
+              <Text style={{ fontSize: 20, fontWeight: 'bold', width: '100%' }}>Shopping cart</Text>
+            ),
+            headerRight: () => (
+              <View style={{ flexDirection: 'row', marginRight: 16 }}>
+                <TouchableOpacity onPress={() => navigation.navigate('My Favorites')}>
+                <Icon name="heart-o" size={25} color="black" style={{ marginRight: 15 }} />
+                </TouchableOpacity>
+              </View>
+            ),
+          })}
+        />    
+        </Drawer.Navigator>
     </NavigationContainer>
   );
-};
+}
 
-export default App;
+const styles = StyleSheet.create({
+  menuContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+  },
+  menuItem: {
+    fontSize: 20,
+    marginVertical: 10,
+  },
+  nav: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+ 
+
+});
+
+

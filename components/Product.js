@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 const Product = (props) => {
-  console.log('Product Image URL:', props.productImage);
-
   return (
-    <TouchableOpacity activeOpacity={0.5}>
+    <TouchableOpacity activeOpacity={0.5} onPress={props.onPress}>
         <View style={styles.productContainer}>
           <Image
-            style={styles.productImage}
+            style={[styles.productImage, { width: 100, height: 100 }]}
             source={{
               uri: props.productImage
             }}
@@ -16,11 +14,7 @@ const Product = (props) => {
             />
             <Text style={styles.productTitle}>{props.title}</Text>
             <Text style={styles.productPrice}>€ {props.price}</Text>
-            <TouchableOpacity
-                style={styles.button}
-            >
-                <Text style={styles.buttonText}>Add to cart</Text>
-            </TouchableOpacity>
+         
       </View>
     </TouchableOpacity>
   );
@@ -35,6 +29,17 @@ const styles = StyleSheet.create({
     margin: 6, 
     alignItems: 'center',
     backgroundColor: '#fff',
+    ...Platform.select({
+      ios: {
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 4,
+      },
+    }),
   },
   productImage: {
     height: 150,
@@ -42,15 +47,14 @@ const styles = StyleSheet.create({
   },
   productTitle: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: 400,
     marginTop: 5,
     width: 155,
     height: 90,
     textAlign: 'center',
   },
   productPrice: {
-    fontSize: 14,
-    color: '#888',
+    fontSize: 16,
   },
   button: {
     backgroundColor: '#b3d1ff',

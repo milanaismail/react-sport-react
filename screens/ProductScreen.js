@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, TextInput, Platform } from 'react-native';
+import { StyleSheet, View, FlatList, Platform } from 'react-native';
 import Filter from '../components/Filter';
 import Product from '../components/Product';
 
@@ -8,6 +8,7 @@ const ProductScreen = ({ navigation }) => {
   const [sortedProducts, setSortedProducts] = useState([]);
   const [sortValue, setSortValue] = useState('0');
 
+
     const getProduct = async () => {
         try {
           //10.0.2.2:60628
@@ -15,7 +16,7 @@ const ProductScreen = ({ navigation }) => {
           let url;
           if (Platform.OS == 'android') {
             //ddev describe om port number te weten te komen
-            url = "http://10.0.2.2:55001/api/products/";
+            url = "http://10.0.2.2:64884/api/products/";
           }
           else {
             url = "http://sport.ddev.site/api/products/"
@@ -23,7 +24,6 @@ const ProductScreen = ({ navigation }) => {
     
           const response = await fetch(url, {
             method: "GET",
-            timeout: 10000, // 10 seconds
           });
 
           if (!response.ok) {
@@ -50,7 +50,6 @@ const ProductScreen = ({ navigation }) => {
             sortProductsByPriceHighToLow();
             break;
           default:
-            // Default: Do nothing or reset to original order
             setSortedProducts(products);
             break;
         }
@@ -65,14 +64,12 @@ const ProductScreen = ({ navigation }) => {
         const sorted = [...sortedProducts].sort((a, b) => b.price - a.price);
         setSortedProducts(sorted);
       };
-
       useEffect(() => {
         getProduct();
       }, []);
 
     return (  
-      <View style={styles.container}>
-          <Text style={styles.shopTitle}>All Products</Text>
+      <View style={styles.container}>         
             <Filter onSortChange={handleSortChange} />
             <FlatList
                 data={sortedProducts}
@@ -88,6 +85,18 @@ const ProductScreen = ({ navigation }) => {
                       productImage={item.productImage}
                       price={item.price}
                       navigation={navigation}
+                      category={item.categoryTitle}
+                      productDetail={item.productDetail}
+                      onPress={() =>
+                        navigation.navigate('ProductDetailScreen', {
+                          id: item.id,
+                          title: item.title,
+                          productImage: item.productImage,
+                          price: item.price,
+                          category: item.categoryTitle,
+                          productDetail: item.productDetail,
+                        })
+                      }
                       />
                     }}
                   />
@@ -99,15 +108,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     alignItems: 'center',
+    height: '100%',
   },
-  shopTitle: {
-    fontSize: 30,
-    fontWeight: 'bold', 
-    backgroundColor: 'rgba(0,0,0,0.1)',
-    width: '100%',
-    textAlign: 'center',
-    paddingVertical: 24,
-  }
+
 });
 
 
