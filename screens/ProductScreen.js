@@ -3,11 +3,11 @@ import { StyleSheet, View, FlatList, Platform } from 'react-native';
 import Filter from '../components/Filter';
 import Product from '../components/Product';
 
-const ProductScreen = ({ navigation }) => {
+const ProductScreen = ({ route, navigation }) => {
   const [products, setProducts] = useState([]);
   const [sortedProducts, setSortedProducts] = useState([]);
   const [sortValue, setSortValue] = useState('0');
-
+  const categoryTitle = route.params?.categoryTitle; // 
 
     const getProduct = async () => {
         try {
@@ -21,6 +21,10 @@ const ProductScreen = ({ navigation }) => {
           else {
             url = "http://sport.ddev.site/api/products/"
           }
+
+          if (sortValue !== '0') {
+            url += `?categoryTitle=${encodeURIComponent(categoryTitle)}`;
+          }
     
           const response = await fetch(url, {
             method: "GET",
@@ -31,8 +35,14 @@ const ProductScreen = ({ navigation }) => {
           }
 
           const json = await response.json();
-          setProducts(json.items);
-          setSortedProducts(json.items);
+
+          const filteredProducts = categoryTitle
+          ? json.items.filter(item => item.categoryTitle === categoryTitle)
+          : json.items;
+  
+
+          setProducts(filteredProducts);
+          setSortedProducts(filteredProducts);
         } catch (error) {
           console.error('Error fetching products:', error);
 
@@ -66,7 +76,7 @@ const ProductScreen = ({ navigation }) => {
       };
       useEffect(() => {
         getProduct();
-      }, []);
+      }, [sortValue, categoryTitle]); 
 
     return (  
       <View style={styles.container}>         

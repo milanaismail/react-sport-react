@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -32,7 +31,7 @@ const ProductStack = () => (
         fontSize: 20,
         fontWeight: '300',
       },
-      headerShown: route.name === 'ProductScreen' ? false : true, // Hide the header for ProductScreen
+      headerShown: route.name === 'ProductScreen' ? false : true, 
     })}
     >
     <Stack.Screen name="ProductScreen" component={ProductScreen} />
@@ -100,12 +99,13 @@ export default function App(){
         <Drawer.Screen
           name="Skates"
           component={ProductScreen}
+          initialParams={{ categoryTitle: 'Ice Hockey Skates' }} 
           options={({ navigation }) => ({
+            headerStyle: {
+              backgroundColor: 'rgba(0,0,0,0.1)',
+            },
             headerTitle: () => (
-              <Image
-                source={LogoImage}
-                style={{ width: 90, height: 40, resizeMode: 'contain' }}
-              />
+              <Text style={{ fontSize: 20, fontWeight: 'bold', width: '100%' }}>Skates</Text>
             ),
             drawerLabelStyle: {
               fontSize: 16, 
@@ -121,16 +121,18 @@ export default function App(){
               </View>
             ),
           })}
+
         />
         <Drawer.Screen
           name="Sticks"
           component={ProductScreen}
+          initialParams={{ categoryTitle: 'Ice Hockey Sticks' }} 
           options={({ navigation }) => ({
+            headerStyle: {
+              backgroundColor: 'rgba(0,0,0,0.1)',
+            },
             headerTitle: () => (
-              <Image
-                source={LogoImage}
-                style={{ width: 90, height: 40, resizeMode: 'contain' }}
-              />
+              <Text style={{ fontSize: 20, fontWeight: 'bold', width: '100%' }}>Sticks</Text>
               ),
               drawerLabelStyle: {
                 fontSize: 16, 
@@ -150,12 +152,13 @@ export default function App(){
         <Drawer.Screen
           name="Helmets"
           component={ProductScreen}
+          initialParams={{ categoryTitle: 'Ice Hockey Helmets' }} 
           options={({ navigation }) => ({
+            headerStyle: {
+              backgroundColor: 'rgba(0,0,0,0.1)',
+            },
             headerTitle: () => (
-              <Image
-                source={LogoImage}
-                style={{ width: 90, height: 40, resizeMode: 'contain' }}
-              />
+              <Text style={{ fontSize: 20, fontWeight: 'bold', width: '100%' }}>Helmets</Text>
             ),
             drawerLabelStyle: {
               fontSize: 16, 
