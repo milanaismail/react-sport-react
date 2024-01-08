@@ -12,6 +12,8 @@ const ProductDetailScreen = ({ route }) => {
   const [favorites, setFavorites] = useState([]);
   const [isShopping, setIsShopping] = useState(false);
   const [shopping, setShopping] = useState([]);
+  const [quantity, setQuantity] = useState(1);
+
   
   const navigation = useNavigation();
 
@@ -97,6 +99,21 @@ const ProductDetailScreen = ({ route }) => {
     }
   };
 
+  const handleQuantityChange = (itemId, action) => {
+    let newQuantity = quantity[itemId] || 1;
+  
+    if (action === 'increase') {
+      newQuantity += 1;
+    } else if (action === 'decrease' && newQuantity > 1) {
+      newQuantity -= 1;
+    }
+  
+    setQuantity((prevQuantity) => ({
+      ...prevQuantity,
+      [itemId]: newQuantity,
+    }));
+  };
+
  const colors = [
     { label: 'Black', value: '#000000' },
     { label: 'Green', value: '#33FF57' },
@@ -164,12 +181,12 @@ const ProductDetailScreen = ({ route }) => {
                 </View>
                 <Text style={styles.quantityTitle}>Quantity</Text>
                 <View style={styles.quantityLabel}>
-                    <TouchableOpacity>
-                        <Text style={styles.quantity}>-</Text>
-                    </TouchableOpacity>
-                        <Text style={styles.quantity}>1</Text>
-                    <TouchableOpacity>
-                        <Text style={styles.quantity}>+</Text>
+                <TouchableOpacity onPress={() => handleQuantityChange(id, 'decrease')}>
+                  <Text style={styles.quantity}>-</Text>
+                </TouchableOpacity>
+                <Text style={styles.quantity}>{quantity[id] || 1}</Text>
+                <TouchableOpacity onPress={() => handleQuantityChange(id, 'increase')}>
+                  <Text style={styles.quantity}>+</Text>
                 </TouchableOpacity>
                 </View>
                 <TouchableOpacity style={styles.button} onPress={addToCart}>
