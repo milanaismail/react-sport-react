@@ -155,7 +155,6 @@ const ProductDetailScreen = ({ route }) => {
   const styleHtml = {
     p:{
       fontSize: 20,
-      fontWeight: 'bold',
     },
     li: {
       fontSize: 16,
