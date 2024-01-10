@@ -14,9 +14,10 @@ const ProductScreen = ({ route, navigation }) => {
           //10.0.2.2:60628
           //http://craft-news-b.ddev.site
           let url;
-          if (Platform.OS == 'android') {
+          if (Platform.OS == "android") {
             //ddev describe om port number te weten te komen
-            url = "http://10.0.2.2:64884/api/products/";
+            url = "http://10.0.2.2:55006/api/products/";
+            console.log(url)
           }
           else {
             url = "http://sport.ddev.site/api/products/"
@@ -33,6 +34,7 @@ const ProductScreen = ({ route, navigation }) => {
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
+          
 
           const json = await response.json();
 
@@ -87,7 +89,7 @@ const ProductScreen = ({ route, navigation }) => {
                 numColumns={2} // Set numColumns to 2 for a two-column layout
                 renderItem={({ item }) => {
                   if (Platform.OS == 'android') {
-                    item.productImage = item.productImage.replace('sport.ddev.site', '10.0.2.2:55001');
+                    item.productImage = item.productImage.replace('sport.ddev.site', '10.0.2.2:55006');
                   }
                     return <Product
                       id={item.id}
