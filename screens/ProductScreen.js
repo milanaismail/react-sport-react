@@ -7,24 +7,27 @@ const ProductScreen = ({ route, navigation }) => {
   const [products, setProducts] = useState([]);
   const [sortedProducts, setSortedProducts] = useState([]);
   const [sortValue, setSortValue] = useState('0');
-  const categoryTitle = route.params?.categoryTitle; 
+
+  const filterProductsByCategory = (category) => {
+    return products.filter((product) => product.categoryTitle === category);
+  };
+
+  const getCategoryTitle = () => {
+    const { categoryTitle } = route.params || {};
+    return categoryTitle;
+  };
 
     const getProduct = async () => {
         try {
           //10.0.2.2:60628
           //http://craft-news-b.ddev.site
           let url;
-          if (Platform.OS == "android") {
+          if (Platform.OS == 'android') {
             //ddev describe om port number te weten te komen
-            url = "http://10.0.2.2:55006/api/products/";
-            console.log(url)
+            url = "http://10.0.2.2:64884/api/products/";
           }
           else {
             url = "http://sport.ddev.site/api/products/"
-          }
-
-          if (sortValue !== '0') {
-            url += `?categoryTitle=${encodeURIComponent(categoryTitle)}`;
           }
     
           const response = await fetch(url, {
@@ -34,17 +37,10 @@ const ProductScreen = ({ route, navigation }) => {
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
-          
 
           const json = await response.json();
-
-          const filteredProducts = categoryTitle
-          ? json.items.filter(item => item.categoryTitle === categoryTitle)
-          : json.items;
-  
-
-          setProducts(filteredProducts);
-          setSortedProducts(filteredProducts);
+          setProducts(json.items);
+          setSortedProducts(json.items);
         } catch (error) {
           console.error('Error fetching products:', error);
 
@@ -76,9 +72,20 @@ const ProductScreen = ({ route, navigation }) => {
         const sorted = [...sortedProducts].sort((a, b) => b.price - a.price);
         setSortedProducts(sorted);
       };
+      
       useEffect(() => {
         getProduct();
-      }, [sortValue, categoryTitle]); 
+      }, []);
+
+      useEffect(() => {
+        const category = getCategoryTitle();
+        if (category) {
+          const filteredProducts = filterProductsByCategory(category);
+          setSortedProducts(filteredProducts);
+        } else {
+          setSortedProducts(products);
+        }
+      }, [products, route.params]);
 
     return (  
       <View style={styles.container}>         
@@ -89,7 +96,7 @@ const ProductScreen = ({ route, navigation }) => {
                 numColumns={2} // Set numColumns to 2 for a two-column layout
                 renderItem={({ item }) => {
                   if (Platform.OS == 'android') {
-                    item.productImage = item.productImage.replace('sport.ddev.site', '10.0.2.2:55006');
+                    item.productImage = item.productImage.replace('sport.ddev.site', '10.0.2.2:55001');
                   }
                     return <Product
                       id={item.id}
